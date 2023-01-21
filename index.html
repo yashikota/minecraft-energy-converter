@@ -6,13 +6,187 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft Energy Converter</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* CSS for styling the form and results */
+        form {
+            padding: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+
+        #result {
+            padding: 20px;
+            background-color: #f2f2f2;
+            margin-top: 20px;
+        }
+
+    </style>
+
 </head>
 
 <body>
-    <h1 class="text-4xl">
-        Minecraft Energy Converter
-    </h1>
+    <h1>Minecraft Energy Converter</h1>
+    <form>
+        <label for="input">Input value:</label>
+        <input type="text" id="input" placeholder="Enter value">
+        <br>
+        <label for="unit">Select unit:</label>
+        <select id="unit">
+            <option value="rf">RF</option>
+            <option value="eu">EU</option>
+            <option value="mj">MJ</option>
+            <option value="j">J</option>
+            <option value="ae">AE</option>
+            <option value="ui">μI</option>
+        </select>
+        <br>
+        <button onclick="convert(event)">Convert</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        function convert(event) {
+            event.preventDefault();
+            // Get input value and unit
+            var input = document.getElementById("input").value;
+            var unit = document.getElementById("unit").value;
+
+            // Conversion factors
+            var rf = {
+                rf: 1,
+                eu: 0.25,
+                mj: 0.1,
+                j: 2.5,
+                ae: 0.5,
+                ui: 1
+            };
+            var eu = {
+                rf: 4,
+                eu: 1,
+                mj: 0.4,
+                j: 10,
+                ae: 2,
+                ui: 4
+            };
+            var mj = {
+                rf: 10,
+                eu: 2.5,
+                mj: 1,
+                j: 25,
+                ae: 5,
+                ui: 10
+            };
+            var j = {
+                rf: 0.4,
+                eu: 0.1,
+                mj: 0.04,
+                j: 1,
+                ae: 0.2,
+                ui: 0.4
+            };
+            var ae = {
+                rf: 2,
+                eu: 0.5,
+                mj: 0.2,
+                j: 5,
+                ae: 1,
+                ui: 2
+            };
+            var ui = {
+                rf: 1,
+                eu: 0.25,
+                mj: 0.1,
+                j: 2.5,
+                ae: 0.5,
+                ui: 1
+            };
+            // Create an empty object to store results
+            var results = {};
+
+            // Check which unit was selected and convert to all other units
+            switch (unit) {
+                case "rf":
+                    results.rf = input;
+                    results.eu = input * rf.eu;
+                    results.mj = input * rf.mj;
+                    results.j = input * rf.j;
+                    results.ae = input * rf.ae;
+                    results.ui = input * rf.ui;
+                    break;
+                case "eu":
+                    results.rf = input * eu.rf;
+                    results.eu = input;
+                    results.mj = input * eu.mj;
+                    results.j = input * eu.j;
+                    results.ae = input * eu.ae;
+                    results.ui = input * eu.ui;
+                    break;
+                case "mj":
+                    results.rf = input * mj.rf;
+                    results.eu = input * mj.eu;
+                    results.mj = input;
+                    results.j = input * mj.j;
+                    results.ae = input * mj.ae;
+                    results.ui = input * mj.ui;
+                    break;
+                case "j":
+                    results.rf = input * j.rf;
+                    results.eu = input * j.eu;
+                    results.mj = input * j.mj;
+                    results.j = input;
+                    results.ae = input * j.ae;
+                    results.ui = input * j.ui;
+                    break;
+                case "ae":
+                    results.rf = input * ae.rf;
+                    results.eu = input * ae.eu;
+                    results.mj = input * ae.mj;
+                    results.j = input * ae.j;
+                    results.ae = input;
+                    results.ui = input * ae.ui;
+                    break;
+                case "ui":
+                    results.rf = input * ui.rf;
+                    results.eu = input * ui.eu;
+                    results.mj = input * ui.mj;
+                    results.j = input * ui.j;
+                    results.ae = input * ui.ae;
+                    results.ui = input;
+                    break;
+            }
+
+            // Display results in the "result" div
+            var output = "RF: " + results.rf + "<br>EU: " + results.eu + "<br>MJ: " + results.mj + "<br>J: " + results.j + "<br>AE: " + results.ae + "<br>μI: " + results.ui;
+            document.getElementById("result").innerHTML = output;
+        }
+    </script>
 </body>
 
 </html>

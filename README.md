@@ -2,6 +2,8 @@
 
 MinecraftのMODで使用されるエネルギー単位であるRF・EU・MJ・J・AE・μIの相互変換を行うプログラム
 
+<https://yashikota.github.io/minecraft-energy-converter>
+
 ## 変換レート
 
 |基準値|RF|EU|MJ|J|AE|μI|
